@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -162,6 +164,7 @@
   <a href="tasklist.html">Tasks</a>
   <a href="./ResumeCharts.jsp">Resume/Job Description</a>
 </div>
+   <%= request.getParameter("email")%>
 
     <p>Dashboard <text id="score001"></text></p>
 		<center>
@@ -267,6 +270,7 @@
 		    ev.preventDefault();
 		    var data = ev.dataTransfer.getData("text");
 		    ev.target.appendChild(document.getElementById(data));
+		    
 		}
 
     //The modal begins

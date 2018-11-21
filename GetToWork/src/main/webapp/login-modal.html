@@ -100,13 +100,15 @@
   <div class="modal-content">
    <!-- <img src="blue-person-icon.jpeg" alt="black-woman-icon" height="90px" width="90px"> -->
 		Create an Account
+<form action = "dp.jsp" method = "POST" >
       <input type="text" id="email" placeholder="Email" >
       <input type="text" id="first" placeholder="First Name" >
       <input type="text" id="last" placeholder="Last Name" >
       <input type="text" id="username" placeholder="Username" >
       <input type="text" id="pass" placeholder="Password" >
-      <input class="button" type = "button" onclick = "register();" name = "ok" value = "Register" />
-  
+      4
+      <input class="button" type = "button" onclick = "register();" name = "ok" value = "Register 1" />
+</form>
  
     <!--  <input type"text" placeholder="Name">
       <input type="text" placeholder="E-mail">  --> 
@@ -141,7 +143,7 @@
       console.error("Error adding document: ", error);
   });
   
-  window.location.href = 'https://gettowork-73510.appspot.com/dp.html';
+  window.location.href = 'https://gettowork-73510.appspot.com/dp.jsp?email='+document.getElementById('email').value;
   
   }
 

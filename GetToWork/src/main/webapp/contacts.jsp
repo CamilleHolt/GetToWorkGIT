@@ -1,12 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Google Calendar API Quickstart 1</title>
+    <title>People API Quickstart</title>
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Google Calendar API Quickstart 1</p>
-5
+    <p>People API Quickstart</p>
+
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
@@ -19,11 +21,11 @@
       var API_KEY = 'AIzaSyALN1GM84vYnZuX0_5AkxLVvXENs5ucjvs';
 
       // Array of API discovery doc URLs for APIs used by the quickstart
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/people/v1/rest"];
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+      var SCOPES = "https://www.googleapis.com/auth/contacts.readonly";
 
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
@@ -66,8 +68,7 @@
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
-          listUpcomingEvents();
-         // eventCreate1();
+          listConnectionNames();
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
@@ -101,79 +102,30 @@
       }
 
       /**
-       * Print the summary and start datetime/date of the next ten events in
-       * the authorized user's calendar. If no events are found an
-       * appropriate message is printed.
+       * Print the display name if available for 10 connections.
        */
-      function listUpcomingEvents() {
-        gapi.client.calendar.events.list({
-          'calendarId': 'primary',
-          'timeMin': (new Date()).toISOString(),
-          'showDeleted': false,
-          'singleEvents': true,
-          'maxResults': 10,
-          'orderBy': 'startTime'
-        }).then(function(response) {
-          var events = response.result.items;
-          appendPre('Upcoming events: 1');
+      function listConnectionNames() {
+        gapi.client.people.people.connections.list({
+           'resourceName': 'people/me',
+           'pageSize': 10,
+           'personFields': 'names,emailAddresses',
+         }).then(function(response) {
+           var connections = response.result.connections;
+           appendPre('Connections:');
 
-          if (events.length > 0) {
-            for (i = 0; i < events.length; i++) {
-              var event = events[i];
-              var when = event.start.dateTime;
-              if (!when) {
-                when = event.start.date;
-              }
-              appendPre(event.summary + ' (' + when + ')')
-            }
-          } else {
-            appendPre('No upcoming events found.');
-          }
-        });
-      }
-      
-      function eventCreate1(){
-    	  var event = {
-    			  'summary': 'Google I/O 2015',
-    			  'location': '800 Howard St., San Francisco, CA 94103',
-    			  'description': 'A chance to hear more about Google\'s developer products.',
-    			  'start': {
-    			    'dateTime': '2019-05-28T09:00:00-07:00',
-    			    'timeZone': 'America/Los_Angeles'
-    			  },
-    			  'end': {
-    			    'dateTime': '2019-05-28T17:00:00-07:00',
-    			    'timeZone': 'America/Los_Angeles'
-    			  },
-    			  'recurrence': [
-    			    'RRULE:FREQ=DAILY;COUNT=2'
-    			  ],
-    			  'attendees': [
-    			    {'email': 'lpage@example.com'},
-    			    {'email': 'sbrin@example.com'}
-    			  ],
-    			  'reminders': {
-    			    'useDefault': false,
-    			    'overrides': [
-    			      {'method': 'email', 'minutes': 24 * 60},
-    			      {'method': 'popup', 'minutes': 10}
-    			    ]
-    			  }
-    			};
-
-    			var request = gapi.client.calendar.events.insert({
-    			  'calendarId': 'primary',
-    			  'resource': event
-    			});
-
-    			request.execute(function(event) {
-    			  appendPre('Event created: ' + event.htmlLink);
-
-        		  document.getElementById("eventid").innerHTML =  'Event created: ' + event.htmlLink.toString();
-    			});
-
-    		
-    	//	});
+           if (connections.length > 0) {
+             for (i = 0; i < connections.length; i++) {
+               var person = connections[i];
+               if (person.names && person.names.length > 0) {
+                 appendPre(person.names[0].displayName)
+               } else {
+                 appendPre("No display name found for connection.");
+               }
+             }
+           } else {
+             appendPre('No connections found.');
+           }
+         });
       }
 
     </script>
@@ -182,7 +134,5 @@
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-    <input type="button" onclick="eventCreate1()">
-    <p id="eventid"></p>
   </body>
 </html>
