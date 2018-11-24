@@ -59,12 +59,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 <body>
 
   <div class="topnav">
-  <a class="active" href="dragNdrop.html">GetToWork</a>
+<a class="active" href="index.jsp?email=<%=request.getParameter("email")%>">GetToWork</a>
   <a href="#">Quick Start</a>
-  <a href="dp.html">Jobs</a>
-  <a href="#contact">Networking</a>
-  <a href="tasklist.html">Tasks</a>
-  <a href="./ResumeCharts.jsp">Resume/Job Description</a>
+  <a href="dp.jsp?email=<%=request.getParameter("email")%>">Jobs</a>
+  <a href="#contact?email=<%=request.getParameter("email")%>">Networking</a>
+  <a href="tasklist.jsp?email=<%=request.getParameter("email")%>">Tasks</a>
+  <a href="./ResumeCharts.jsp?email=<%=request.getParameter("email")%>">Resume/Job Description</a>
+
 </div>
 
 
@@ -88,14 +89,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
       <h1 class="w3-text-teal">Learn more more about your resume</h1>
        
  
-<form method="POST" enctype="multipart/form-data" action="FileUploadServlet"> <!-- The action might have some issues GetToWorkServer.GetToWork -->
+<form enctype="multipart/form-data" >
   Copy and Paste your Resume or Cover Letter:    <br>
   <textarea name="resume" id="resumeText" rows="20" cols="50"></textarea>  
    
   <br> Copy and paste a Job Description:    <br>
    <textarea name="job" id="jobText" rows="20" cols="50"></textarea>  
  
- <!--   <input type="text" name="resume" id="resumeText" style="height:200px;font-size:14pt;" ><br/>  -->
   <br/>
   <input type="button" value="Press" onclick="getGraphs()" > 
   
@@ -164,7 +164,6 @@ function getGraphs(){
 		var resumeText = text.toLowerCase();
 		resumeText = resumeText.replace(/,/g, '');
 
-		resumeText = resumeText.replace(new RegExp('-', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' is ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' are', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp('and ', 'g'), ' ');
@@ -185,8 +184,6 @@ function getGraphs(){
 		resumeText = resumeText.replace(new RegExp(' inc. ', 'g'), '');
 		resumeText = resumeText.replace(new RegExp(' its ', 'g'), '');
 		resumeText = resumeText.replace(new RegExp(' it ', 'g'), '');
-		resumeText = resumeText.replace(new RegExp(' we ', 'g'), '');
-		resumeText = resumeText.replace(new RegExp(' such ', 'g'), '');
 		resumeText = resumeText.replace(new RegExp(' were ', 'g'), '');
 		resumeText = resumeText.replace(new RegExp(' was ', 'g'), '');
 		resumeText = resumeText.replace(new RegExp(' you ', 'g'), '');
@@ -247,7 +244,7 @@ function getGraphs(){
 		
 	}
 
-	//document.getElementById("demo1").innerText = wordM;
+	
 	var chart = new CanvasJS.Chart("chartContainer"+text, {
 		title:{
 			text: "Most Frequently Used Words"              
@@ -272,7 +269,6 @@ function getGraphs(){
 	
 	function compareText(resume, job){
 		var resumeText = document.getElementById(resume).value;
-		//document.getElementById("r").innerHTML = document.getElementById(resume).value;
 		resumeText = getFilteredText(resumeText);
 		
 		var wordResumeM = "";
@@ -282,10 +278,9 @@ function getGraphs(){
 			wordResumeM = wordResume[i].name + wordResume[i].total +" "+ wordResumeM;
 			
 		}
-		// document.getElementById("r").innerHTML =  wordResumeM;
+		
 		
 		var jobText = document.getElementById(job).value;	
-		//document.getElementById("j").innerHTML = jobText;
 		jobText = getFilteredText(jobText);
 		var wordJobM = "";
 		var wordJob = createWordMap(splitByWords(jobText.toLowerCase()));
@@ -316,20 +311,7 @@ function getGraphs(){
 		
 
 		document.getElementById("r").innerHTML = suggest[0]+ ", "+ suggest[1]+ ", "+ suggest[2]+ ", "+ suggest[3];
-		/*for (var i = 0;i < wordJob.length;i++){
-			//wordJobM = wordJob[i].name + wordJob[i].total +" "+ wordJobM;
-			if(wordResume.hasOwnProperty(wordJob[i].key) ){
-				inCommon = wordJob[i].name+ inCommon;
-			}
-		}*/
 		
-	//	document.getElementById("j").innerHTML =  jobResumeM;
-		
-		
-//	}
-	
-
-	//function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	exportEnabled: true,
@@ -351,7 +333,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		tickColor: "#4F81BC"
 	},
 	axisY2: {
-		title: "Clutch - Units",
+		title: "   ",
 		titleFontColor: "#C0504E",
 		lineColor: "#C0504E",
 		labelFontColor: "#C0504E",
@@ -370,10 +352,6 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		showInLegend: true,      
 		yValueFormatString: "#,##0.# Units",
 		
-		/*
-		var commonWord = [];
-		var resCommon = [];
-		var jobCommon = [];*/
 		dataPoints: [
 			{ label: commonWord[0],  y: resCommon[0] },
 			{ label: commonWord[1],  y: resCommon[1] },
@@ -500,10 +478,6 @@ function doAjax() {
 	});
 	}
 </script>
-
-
-  
-
 
 </body>
 </html>

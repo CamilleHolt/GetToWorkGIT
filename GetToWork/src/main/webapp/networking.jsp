@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -42,11 +44,11 @@
 <body>
 
   <div class="topnav">
-  <a class="active" href="dragNdrop.html">GetToWork</a>
+  <a class="active" href="index.jsp">GetToWork</a>
   <a href="#">Quick Start</a>
-  <a href="dp.html">Jobs</a>
+  <a href="dp.jsp">Jobs</a>
   <a href="#contact">Networking</a>
-  <a href="tasklist.html">Tasks</a>
+  <a href="tasklist.jsp">Tasks</a>
   <a href="./ResumeCharts.jsp">Resume/Job Description</a>
 </div>
 

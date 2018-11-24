@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -42,12 +44,13 @@
 <body>
 
   <div class="topnav">
-  <a class="active" href="dragNdrop.html">GetToWork</a>
+  <a class="active" href="index.jsp?email=<%=request.getParameter("email")%>">GetToWork</a>
   <a href="#">Quick Start</a>
-  <a href="dp.html">Jobs</a>
-  <a href="#contact">Networking</a>
-  <a href="tasklist.html">Tasks</a>
-  <a href="./ResumeCharts.jsp">Resume/Job Description</a>
+  <a href="dp.jsp?email=<%=request.getParameter("email")%>">Jobs</a>
+  <a href="#contact?email=<%=request.getParameter("email")%>">Networking</a>
+  <a href="tasklist.jsp?email=<%=request.getParameter("email")%>">Tasks</a>
+  <a href="./ResumeCharts.jsp?email=<%=request.getParameter("email")%>">Resume/Job Description</a>
+
 </div>
 
 <div style="width:70%; margin: auto;">
