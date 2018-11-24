@@ -195,6 +195,8 @@ h3 {
   };
   firebase.initializeApp(config);
 
+var db = firebase.firestore();
+
 function validateUser()
 {
   var email = document.getElementById('email').value;
