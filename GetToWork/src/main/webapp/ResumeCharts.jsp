@@ -59,12 +59,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 <body>
 
   <div class="topnav">
-  <a class="active" href="index.jsp">GetToWork</a>
+<a class="active" href="index.jsp?email=<%=request.getParameter("email")%>">GetToWork</a>
   <a href="#">Quick Start</a>
-  <a href="dp.jsp">Jobs</a>
-  <a href="#contact">Networking</a>
-  <a href="tasklist.jsp">Tasks</a>
-  <a href="./ResumeCharts.jsp">Resume/Job Description</a>
+  <a href="dp.jsp?email=<%=request.getParameter("email")%>">Jobs</a>
+  <a href="#contact?email=<%=request.getParameter("email")%>">Networking</a>
+  <a href="tasklist.jsp?email=<%=request.getParameter("email")%>">Tasks</a>
+  <a href="./ResumeCharts.jsp?email=<%=request.getParameter("email")%>">Resume/Job Description</a>
+
 </div>
 
 
@@ -332,7 +333,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		tickColor: "#4F81BC"
 	},
 	axisY2: {
-		title: "Clutch - Units",
+		title: "   ",
 		titleFontColor: "#C0504E",
 		lineColor: "#C0504E",
 		labelFontColor: "#C0504E",

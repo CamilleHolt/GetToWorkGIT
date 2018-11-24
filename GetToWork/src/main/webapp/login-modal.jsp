@@ -143,11 +143,12 @@ h3 {
 <body>
 
   <div class="topnav">
-  <a class="active" href="index.jsp">GetToWork</a>
+  <a class="active" href="index.jsp?email=<%=request.getParameter("email")%>">GetToWork</a>
   <a href="#">Quick Start</a>
-  <a href="dp.jsp">Jobs</a>
-  <a href="networking.jsp">Networking</a>
-  <a href="#">Tasks</a>
+  <a href="dp.jsp?email=<%=request.getParameter("email")%>">Jobs</a>
+  <a href="#contact?email=<%=request.getParameter("email")%>">Networking</a>
+  <a href="tasklist.jsp?email=<%=request.getParameter("email")%>">Tasks</a>
+  <a href="./ResumeCharts.jsp?email=<%=request.getParameter("email")%>">Resume/Job Description</a>
 </div>
 
 <div class="bg-modal">
