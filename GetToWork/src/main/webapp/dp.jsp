@@ -154,17 +154,17 @@
 
 		</style>
 </head>
-
+<p id="email" hidden><%=request.getParameter("email")%></p>
 <body>
-	<div class="topnav">
-  <a class="active" href="index.jsp">GetToWork</a>
+<div class="topnav">
+  <a class="active" href="index.jsp?email=<%=request.getParameter("email")%>">GetToWork</a>
   <a href="#">Quick Start</a>
-  <a href="dp.jsp">Jobs</a>
-  <a href="#contact">Networking</a>
-  <a href="tasklist.jsp">Tasks</a>
-  <a href="./ResumeCharts.jsp">Resume/Job Description</a>
+  <a href="dp.jsp?email=<%=request.getParameter("email")%>">Jobs</a>
+  <a href="#contact?email=<%=request.getParameter("email")%>">Networking</a>
+  <a href="tasklist.jsp?email=<%=request.getParameter("email")%>">Tasks</a>
+  <a href="./ResumeCharts.jsp?email=<%=request.getParameter("email")%>">Resume/Job Description</a>
 </div>
-   <%= request.getParameter("email")%>
+   
 
     <p>Dashboard <text id="score001"></text></p>
 		<center>
@@ -192,9 +192,7 @@
     <br /><br /><br /><br />
 
     <div class="box001" ondrop="drop(event)" ondragover="allowDrop(event)">
-      <!--
-			<img src="hey-blackchild.jpeg" draggable="true" ondragstart="drag(event)" id="drag1" width="100" height="31">
-    -->
+     
       <button id="myBtn" draggable="true" id="drag1" ondragstart="drag(event)" class="button">Pending Job</button>
 
       <!-- The Modal -->
@@ -407,6 +405,7 @@
 
 		function drag(ev) {
 		    ev.dataTransfer.setData("text", ev.target.id);
+		    //document.getElementById("event-title").value;
 		}
 
 		function drop(ev) {
@@ -433,6 +432,7 @@
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
+    	document.getElementById("drag1").innerHTML = "324567";
         modal.style.display = "none";
     }
 
