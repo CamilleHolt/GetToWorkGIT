@@ -88,13 +88,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     <div class="w3-twothird w3-container">
       <h1 class="w3-text-teal">Learn more more about your resume</h1>
        
- 
+
 <form enctype="multipart/form-data" >
+ What you title are you looking for? <br>
+ <input type= "text" id="jobTitle"/>
   Copy and Paste your Resume or Cover Letter:    <br>
-  <textarea name="resume" id="resumeText" rows="20" cols="50"></textarea>  
+  <textarea name="resume" id="resumeText" rows="20" cols="100"></textarea>  
    
   <br> Copy and paste a Job Description:    <br>
-   <textarea name="job" id="jobText" rows="20" cols="50"></textarea>  
+   <textarea name="job" id="jobText" rows="20" cols="100"></textarea>  
  
   <br/>
   <input type="button" value="Press" onclick="getGraphs()" > 
@@ -102,6 +104,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 </form>
 
 <div id="demo1">  </div>
+
+
 
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
@@ -165,6 +169,7 @@ function getGraphs(){
 		resumeText = resumeText.replace(/,/g, '');
 
 		resumeText = resumeText.replace(new RegExp(' is ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' or ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' are', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp('and ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' for', 'g'), ' ');
@@ -311,8 +316,7 @@ function getGraphs(){
 		
 
 		document.getElementById("r").innerHTML = suggest[0]+ ", "+ suggest[1]+ ", "+ suggest[2]+ ", "+ suggest[3];
-		
-
+			
 var chart = new CanvasJS.Chart("chartContainer", {
 	exportEnabled: true,
 	animationEnabled: true,
@@ -387,6 +391,11 @@ var chart = new CanvasJS.Chart("chartContainer", {
 });
 chart.render();
 
+var keywords = commonWord[0]+ '-'+ commonWord[1]+'-'+ commonWord[3]+'-'+ commonWord[4];
+var title = document.getElementById('jobTitle').value;
+title=title.replace(' ','-');
+
+document.getElementById('jobFrame').innerHTML = '<iframe height="300px" width="100%" src="https://www.monster.com/jobs/search/?q='+ title +'-'+commonWord[0]+'-'+commonWord[1]+  ' " name="iframe_a"></iframe>';
 
 	}
 function toggleDataSeries(e) {
@@ -418,6 +427,9 @@ function toggleDataSeries(e) {
 <h2>Here are some word you should consider adding to your resume.</h2>
 <h1 id="r"></h1>
 <h1 id="j"></h1>
+
+Here are some other jobs you might want to consider.
+<div id="jobFrame">  </div>
       <p> Welcome it Get To Work </p>
     </div>
 

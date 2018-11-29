@@ -168,7 +168,7 @@ h3 {
        <input type="text" id="last" placeholder="Last Name" >
        <input type="text" id="username" placeholder="Username" >
        <input type="text" id="pass" placeholder="Password" >
-       <input class="button" type = "button" onclick = "register();" name = "ok" value = "Register Now">
+       <input class="button" type = "button" onclick = "validateUser();" name = "ok" value = "Register Now">
   </div>
 
   <div id="login" class="tabcontent">
@@ -193,24 +193,71 @@ h3 {
     storageBucket: "get-to-work-9215b.appspot.com",
     messagingSenderId: "70498652985"
   };
+  
   firebase.initializeApp(config);
-  function register()
-  {
   var db = firebase.firestore();
-  db.collection("Users").add({
-      email: document.getElementById('email').value,
-      first: document.getElementById('first').value,
-      last: document.getElementById('last').value,
-      password: document.getElementById('pass').value
-  })
-  .then(function(docRef) {
+function validateUser()
+{
+  var email = document.getElementById('email').value;
+  var first = document.getElementById('first').value;
+  var last = document.getElementById('last').value;
+  var password = document.getElementById('pass').value;
+  var docRef = db.collection("Users").doc(email);
+  
+  docRef.get().then(function(doc) {
+    if (doc.exists) 
+    {
+      alert("This email address is already registered!");
+      console.log("exists");
+      return;
+    } 
+    else
+    {
+      if (email == "" || first == "" || last == "" || password == "")
+      {
+        alert("One of your fields is empty. Please complete every field.");
+        return;
+      }
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // credit to w3 schools for this. https://www.w3resource.com/javascript/form/email-validation.php
+      
+      if(!email.match(mailformat))
+      {
+        alert("Your email address is invalid.");return;
+      }
+      if (first.length < 2 || last.length < 2)
+      {
+        alert("Your first or last name is too short");
+        return;
+      }
+      if (password.length < 8)
+      {
+        alert("Your password is too short!");
+        return;
+      }
+      register();
+    }
+      }).catch(function(error) 
+      {
+        alert("There has been some error. Perhaps you attempted to register with an invalid email address. Please try again.");console.log("Error getting document:", error);
+        });
+}
+function register()
+{
+  var userEmail = document.getElementById('email').value;
+  db.collection("Users").doc(userEmail).set({
+    email: userEmail,
+    first: document.getElementById('first').value,
+    last: document.getElementById('last').value,
+    password: document.getElementById('pass').value
+    })
+    .then(function(docRef) {
       console.log("Document written with ID: ", docRef.id);
-  })
-  .catch(function(error) {
-      console.error("Error adding document: ", error);
-  });
-  window.location.href = 'https://gettowork-73510.appspot.com/dp.jsp?email='+document.getElementById('email').value;
-  }
+      })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+        });
+        window.location.href = 'https://gettowork-73510.appspot.com/dp.jsp?email='+document.getElementById('email').value;
+}
   function openCreds(evt, creds) {
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
