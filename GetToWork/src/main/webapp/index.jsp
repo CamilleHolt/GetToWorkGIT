@@ -21,7 +21,7 @@ body {
     right: 0;
     bottom: 0;
     width: 100%;
-    height: 80%;
+    height: 50%;
 }
 
 .contentTop {
@@ -69,15 +69,14 @@ body {
 }
 
 #box1 {
-
 	height: 100%;
 	width: 100%;
 	background-size: cover;
 	display: table;
 	color: white;
   background-position: fixed;
-
 }
+
 #box2 {
 	background-color: lightgreen;
 	height: 100%;
@@ -100,8 +99,20 @@ body {
     color: black;
     background-position: fixed;
   }
-  #box4{
+
+  #box3B{
     background-color: lightgray;
+    height: 700px;
+    width: 100%;
+    background-size: 50% 50%;
+    background-size: cover;
+    display: table;
+    color: black;
+    background-position: fixed;
+  }
+
+  #box4{
+    background-color: green;
     height: 450px;
     width: 100%;
     background-size: 50% 50%;
@@ -109,6 +120,19 @@ body {
     display: table;
     color: black;
     background-position: fixed;
+
+  }
+
+  #box5{
+    background-color: green;
+    height: 100px;
+    width: 100%;
+    background-size: 50% 50%;
+    background-size: cover;
+    display: table;
+    color: white;
+    background-position: fixed;
+    text-align: center;
 
   }
 
@@ -134,6 +158,18 @@ body {
     color: white;
     background-position: center;
     background-position: fixed;
+  }
+  #insidebox3{
+    background-color: lightgray;
+    height: 50vh;
+    width: 120vh;
+    background-size: 50% 50%;
+    background-size: cover;
+    display: table;
+    color: white;
+    background-position: center;
+    background-position: fixed;
+    padding-top: 80px;
   }
 #myBtn:hover {
     background: #ddd;
@@ -223,6 +259,50 @@ body {
   .padding2{
     margin-top: 90px;
   }
+
+
+  * {
+    box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 200px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+#center-texth2 {
+  text-align: center;
+  color: white;
+  padding-top: 20px;
+  font-size: 18px;
+}
+
+#center-texth3 {
+  text-align: center;
+  color: white;
+  padding-top: 20px;
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+#center-textp {
+  text-align: center;
+  color: lightgray;
+  font-size: 14px;
+}
+
+
 </style>
 </head>
 <body>
@@ -250,22 +330,42 @@ body {
   <div id="insidebox">
   <h2 class="changeFontInsideBox">Be More Effective</h2>
   <h2 class="changeFontToBlack">A structured approach helps you stay organized and focused so you feel more in control of your job search.</h2>
-  <img src="jobs.jpeg" alt="jobs dashboard" width="800" height="240" class="padding">
+  <img src="dpmorgan.png" alt="jobs dashboard" width="800" height="240" class="padding">
   <h2 class="changeFontInsideBox">Reduce Stress & Anxiety</h2>
   <h2 class="changeFontToBlack">A visual, intuitive layout helps you instantly see where all of your job applications and networking activities stand and what you need to do next<h2>
 </div>
 </center>
 </div>
 
-<div id="box4">
-  <div id="insidebox2">
+<div id="box3B">
   <center>
-    <h2 class="changeFontInsideBox padding2">Boost Your Pipeline</h2>
-    <h2 class="changeFontToBlack2">Google for Jobs search bar brings all job postings aggregated from across</h2>
-      <h2 class="changeFontToBlack2">popular job boards and company career pages to you.</h2>
-    <img src="jobs.jpeg" alt="jobs dashboard" width="650" height="100" class="padding">
-  </center>
+  <div id="insidebox3">
+  <img src="checklist.png" alt="jobs dashboard" width="800" height="600" class="padding">
 </div>
+</center>
+</div>
+
+
+<div class="row">
+  <div class="column" style="background-color:green;">
+    <h2 id="center-texth2">Solution</h2>
+    <p id="center-textp">Features</p>
+    <p id="center-textp">Quick Start Video</p>
+    <p id="center-textp">FAQ</p>
+  </div>
+  <div class="column" style="background-color:green;">
+    <h2 id="center-texth2">Company</h2>
+    <p id="center-textp">About</p>
+    <p id="center-textp">Media</p>
+    <p id="center-textp">Terms & Privacy</p>
+  </div>
+  <div class="column" style="background-color:green;">
+    <h2 id="center-texth2">Connect</h2>
+    <p id="center-textp">Contact Us</p>
+  </div>
+</div>
+<div id="box5">
+<h2 id="center-texth3">GetToWork Inc. |  info@gettowork.com | © 2018 All Rights Reserved</h2>
 </div>
 <script>
 var video = document.getElementById("myVideo");

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<title>Web Page Design</title>
+<head>
+<button onclick="makeCard()" id="card" value="make card"> abc </button>
+dfgchv
+
+<script>
+
+
+function makeCard(){
+	document.write("1");
+var vCard;
+import vcards-js;
+document.write("2");
+//create a new vCard
+vCard = vCard();
+document.write("3");
+//set properties
+vCard.firstName = 'Eric';
+vCard.middleName = 'J';
+vCard.lastName = 'Nesser';
+vCard.organization = 'ACME Corporation';
+vCard.photo.attachFromUrl('https://avatars2.githubusercontent.com/u/5659221?v=3&s=460', 'JPEG');
+vCard.workPhone = '312-555-1212';
+vCard.birthday = new Date(1985, 0, 1);
+vCard.title = 'Software Developer';
+vCard.url = 'https://github.com/enesser';
+vCard.note = 'Notes on Eric';
+document.write("4");
+//save to file
+vCard.saveToFile('./eric-nesser.vcf');
+document.write("5");
+//get as formatted string
+console.log(vCard.getFormattedString());
+document.write("6");
+document.write("Hello, Coding Ground!");
+}
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -166,7 +166,6 @@ h3 {
        <input type="text" id="email" placeholder="Email" >
        <input type="text" id="first" placeholder="First Name" >
        <input type="text" id="last" placeholder="Last Name" >
-       <input type="text" id="username" placeholder="Username" >
        <input type="text" id="pass" placeholder="Password" >
        <input class="button" type = "button" onclick = "validateUser();" name = "ok" value = "Register Now">
   </div>
@@ -175,9 +174,9 @@ h3 {
     <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
     <img src="grayish-icon.png" alt="black-woman-icon" height="90px" width="90px">
      <h3>Log In</h3>
-       <input type="text" id="email" placeholder="Email">
-       <input type="text" id="pass" placeholder="Password">
-       <input class="button" type = "button" onclick = "register();" name = "ok" value = "Login">
+       <input type="text" id="emaillg" placeholder="Email">
+       <input type="text" id="passlg" placeholder="Password">
+       <input class="button" type = "button" onclick = "login();" name = "ok" value = "Login">
   </div>
 </div>
 
@@ -193,15 +192,17 @@ h3 {
     storageBucket: "get-to-work-9215b.appspot.com",
     messagingSenderId: "70498652985"
   };
-  
   firebase.initializeApp(config);
-  var db = firebase.firestore();
+
+var db = firebase.firestore();
+
 function validateUser()
 {
   var email = document.getElementById('email').value;
   var first = document.getElementById('first').value;
   var last = document.getElementById('last').value;
   var password = document.getElementById('pass').value;
+
   var docRef = db.collection("Users").doc(email);
   
   docRef.get().then(function(doc) {
@@ -240,6 +241,41 @@ function validateUser()
       {
         alert("There has been some error. Perhaps you attempted to register with an invalid email address. Please try again.");console.log("Error getting document:", error);
         });
+}
+function login()
+{
+  var email = document.getElementById('emaillg').value
+  var pass = document.getElementById('passlg').value
+
+  var docRef = db.collection("Users").doc(email);
+  
+  docRef.get().then(function(doc) {
+    if (doc.exists) 
+    {
+      if (doc.data().password == pass)
+      {
+        console.log("Document data:", doc.data());
+        //window.location.replace("https://gettowork-73510.appspot.com");
+
+        window.open("https://gettowork-73510.appspot.com/dp.jsp" + '?json=' + doc.data().email)
+      }
+      else
+      {
+        alert("This is the wrong password");
+        console.log("wrong password");
+      }
+    } 
+    else 
+    {
+      alert("This email address is not registered!");
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+    }).catch(function(error) 
+    {
+      alert("This email address is not registered!");
+    console.log("Error getting document:", error);
+    });
 }
 function register()
 {

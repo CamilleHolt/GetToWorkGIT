@@ -91,7 +91,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 
 <form enctype="multipart/form-data" >
  What you title are you looking for? <br>
- <input type= "text" id="jobTitle"/>
+ <input type= "text" id="jobTitle"/> <br>
   Copy and Paste your Resume or Cover Letter:    <br>
   <textarea name="resume" id="resumeText" rows="20" cols="100"></textarea>  
    
@@ -172,6 +172,7 @@ function getGraphs(){
 		resumeText = resumeText.replace(new RegExp(' or ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' are', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp('and ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' and ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' for', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' be ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(':', 'g'), ' ');
@@ -212,6 +213,27 @@ function getGraphs(){
 		resumeText = resumeText.replace(new RegExp(' can ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' at ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' than ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' how ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' other ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' that ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' all ', 'g'), ' ');
+
+		resumeText = resumeText.replace(new RegExp(' have ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' has ', 'g'), ' ');
+
+		resumeText = resumeText.replace(new RegExp(' well ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' we ', 'g'), ' ');
+
+		resumeText = resumeText.replace(new RegExp(' when ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' where ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' what ', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp(' why ', 'g'), ' ');
+
+		resumeText = resumeText.replace(new RegExp(' others ', 'g'), ' ');
+
+		resumeText = resumeText.replace(new RegExp(' no ', 'g'), ' ');
+
+		resumeText = resumeText.replace(new RegExp(' yes ', 'g'), ' ');
 
 		resumeText = resumeText.replace(new RegExp(' make ', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp(' use ', 'g'), ' ');
@@ -228,6 +250,7 @@ function getGraphs(){
 		resumeText = resumeText.replace(new RegExp('0', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp('●', 'g'), ' ');
 		resumeText = resumeText.replace(new RegExp('•', 'g'), ' ');
+		resumeText = resumeText.replace(new RegExp('&', 'g'), ' ');
 		
 		return resumeText;
 		
@@ -395,7 +418,7 @@ var keywords = commonWord[0]+ '-'+ commonWord[1]+'-'+ commonWord[3]+'-'+ commonW
 var title = document.getElementById('jobTitle').value;
 title=title.replace(' ','-');
 
-document.getElementById('jobFrame').innerHTML = '<iframe height="300px" width="100%" src="https://www.monster.com/jobs/search/?q='+ title +'-'+commonWord[0]+'-'+commonWord[1]+  ' " name="iframe_a"></iframe>';
+document.getElementById('jobFrame').innerHTML = '<iframe height="600px" width="75%" src="https://www.monster.com/jobs/search/?q='+ title +'-'+commonWord[0]+'-'+commonWord[1]+  ' " name="iframe_a"></iframe>';
 
 	}
 function toggleDataSeries(e) {

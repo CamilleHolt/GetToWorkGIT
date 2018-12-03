@@ -8,6 +8,11 @@
   </head>
   <body>
     <p>People API Quickstart</p>
+    
+    <input type="button" value="Add a Contact" onclick="addContact()" />
+   
+   
+  
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
@@ -15,7 +20,11 @@
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
+
+<p id="test" ></p>
     <script type="text/javascript">
+    
+   
       // Client ID and API key from the Developer Console
       var CLIENT_ID = '838423436336-8ldgmn1cjfh1a3aumkovginh1o4rrnh5.apps.googleusercontent.com'
       var API_KEY = 'AIzaSyALN1GM84vYnZuX0_5AkxLVvXENs5ucjvs';
@@ -69,6 +78,8 @@
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           listConnectionNames();
+          document.write("1");
+          addContact();
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
@@ -127,6 +138,80 @@
            }
          });
       }
+      
+      /*
+      var createData = {
+    	      name        : 'Ritesh Vishwakarma',                    // Default is ''
+    	      display_name: 'Ritesh Raj Vishwakarma',              // Default is ''
+    	      email       : 'ritesh@gmail.com',
+    	      is_primary  : true,                     // Default is true
+    	      contact_type: 'other',                  // Default is other.
+    	      phoneNumber: '9876543210',                  // Default is other.
+    	      headers     :{
+    	          'GData-Version': '3.0',
+    	          'User-Agent'   : 'SomeAgent'
+    	      },
+    	      extended_property: [                    // Optional
+    	          {name: 'custom_key_2', value: 'custom_value_2'},
+    	          {name: 'custom_key_2', value: 'custom_value_2'}
+    	      ]
+    	  };
+
+      gapi.client.addContact(createData, function (error,contact) {
+    	  console.log(error)
+    	  console.log(contact)
+    	});
+*/
+
+//https://people.googleapis.com/v1/people:createContact
+
+ function addContact(){
+	 document.write("2");
+gapi.client.init({
+
+    'apiKey': 'AIzaSyALN1GM84vYnZuX0_5AkxLVvXENs5ucjvs',
+    // clientId and scope are optional if auth is not required.
+    'clientId': '838423436336-8ldgmn1cjfh1a3aumkovginh1o4rrnh5.apps.googleusercontent.com',
+    'scope': 'https://www.googleapis.com/auth/contacts',
+}).then(function () {
+    // 3. Initialize and make the API request.
+    document.write("3");
+    return gapi.client.request({
+        'method': "POST",
+        'path': 'https://people.googleapis.com/v1/people:createContact',
+        'datatype': 'jsonp',
+        'parent': "Name the parent",
+        'body': {
+            "names": [
+                {
+                    "givenName": "Name to be given"
+                }
+            ],
+            "emailAddresses": [
+                {
+                    "value": "Email_Add to be given"
+                }
+            ],
+            "phoneNumbers": [
+                {
+                    "value": "phone number to be given"
+                }
+            ]
+        }
+    })
+
+}).then(function (response) {
+	document.write("4");
+    console.log(response.result);
+    document.getElementById("test").innerHTML = "Create New contact Please Check into google contacts";
+    document.write("5");
+}, function (reason) {
+    console.log('Error: ' + reason.result.error.message);
+    document.write(reason.result.error.message);
+});
+
+}
+//};
 
     </script>
 
